@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Novedades
 
-## Getting Started
+Aplicación web moderna para registrar, visualizar y gestionar novedades o peticiones. Construida con **Next.js 15 (App Router)**, **React 19**, **TypeScript**, **MongoDB Atlas**, **TailwindCSS v4**, **shadcn/ui**, **NextAuth** y animaciones con **Framer Motion**.
 
-First, run the development server:
+## ✨ Características principales
+- **Landing pública** con formulario validado en tiempo real para registrar novedades.
+- **Panel administrativo protegido** (rol `admin`) con filtro por estado, buscador y paginación.
+- **CRUD completo** de novedades: creación, edición de datos y estado, eliminación con confirmación.
+- **Estadísticas dinámicas** por estado y tarjetas de resumen.
+- **UI moderna y responsive** con modo oscuro, animaciones suaves y toasts de feedback.
+- **Protección de rutas** vía middleware + NextAuth (Credenciales).
+- **Persistencia** en MongoDB Atlas con timestamps automáticos (`createdAt`, `updatedAt`).
+- **Refrescado automático** del dashboard (SWR con polling) listo para integrar WebSockets o Pusher.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🧱 Arquitectura
+```
+src/
+ ├─ app/
+ │   ├─ (páginas públicas y protegidas)
+ │   ├─ api/
+ │   │   └─ novedades/ (REST CRUD)
+ │   └─ admin/
+ ├─ components/
+ │   ├─ admin/ (tablero, modal, stats)
+ │   ├─ ui/ (shadcn/ui)
+ │   └─ ... (Navbar, formularios, providers)
+ ├─ context/
+ ├─ lib/ (conexión MongoDB, auth options)
+ ├─ models/ (Mongoose schemas)
+ ├─ types/ (tipos compartidos NextAuth & dominio)
+ └─ utils/ (validaciones con Zod)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Requisitos previos
+- Node.js 18.18 o superior (recomendado LTS más reciente).
+- Cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y base de datos creada.
+- Variables de entorno configuradas (ver siguiente sección).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Variables de entorno
+Crea un archivo `.env.local` en la raíz del proyecto con:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+# MongoDB
+MONGODB_URI=your-mongodb-atlas-connection-string
+MONGODB_DB=sistema_novedades # opcional, por defecto usa este nombre
 
-## Learn More
+# NextAuth
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=genera_un_secreto_seguro
+ADMIN_EMAIL=admin@empresa.com
+ADMIN_PASSWORD_HASH=$2a$10$hashGeneradoPorBcrypt
+```
 
-To learn more about Next.js, take a look at the following resources:
+> 🔐 **Contraseña de admin**: genera un hash seguro con bcrypt.
+>
+> ```bash
+> node -e "console.log(require('bcryptjs').hashSync('TuPasswordSuperSegura', 10))"
+> ```
+>
+> Copia el resultado en `ADMIN_PASSWORD_HASH`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+En producción (Vercel) define las mismas variables en la sección de Environment Variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Puesta en marcha local
+```bash
+# 1. Instala dependencias
+yarn install # o npm install
 
-## Deploy on Vercel
+# 2. Arranca el servidor en modo desarrollo
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 3. Abre la app
+disponible en http://localhost:3000
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧭 Flujo funcional
+1. **Usuarios públicos** registran novedades desde `/`.
+2. Los datos se guardan con estado inicial `Pendiente` y generan un toast de confirmación.
+3. **Administradores** inician sesión en `/login` (NextAuth Credenciales).
+4. Panel `/admin` protegido por middleware muestra estadísticas, tabla y cards responsive.
+5. Se pueden editar datos/estado vía modal, cambiar estado inline o eliminar con confirmación.
+6. Todas las acciones generan feedback visual mediante toasts y animaciones.
+
+## 🧪 Extensibilidad y mejoras sugeridas
+- Integrar **WebSockets / Pusher** para notificaciones en tiempo real.
+- Añadir **exportaciones** (CSV / XLSX) desde el panel.
+- Configurar **pruebas** con Playwright o Vitest + Testing Library.
+- Conectar con servicios de notificación (correo, SMS) tras cambios de estado.
+
+## ☁️ Despliegue en Vercel
+1. Haz fork o sube el repositorio a tu cuenta de GitHub.
+2. Crea un nuevo proyecto en [Vercel](https://vercel.com/new) y selecciona el repo.
+3. Define las variables de entorno (`MONGODB_URI`, `MONGODB_DB`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`).
+4. Deploy ➜ Vercel ejecutará automáticamente `npm run build` y `npm start`.
+
+## 🤝 Scripts disponibles
+- `npm run dev` – servidor de desarrollo con HMR.
+- `npm run build` – build optimizada para producción.
+- `npm run start` – arranca la app en modo producción.
+- `npm run lint` – ejecuta ESLint.
+
+## 📄 Licencia
+Proyecto entregado como plantilla base. Ajusta o agrega la licencia que necesites antes de publicar.
