@@ -3,62 +3,95 @@
 import { motion } from 'framer-motion';
 import { NovedadForm } from '@/components/novedad-form';
 import { AdminAccessCard } from '@/components/admin-access-card';
-import { Separator } from '@/components/ui/separator';
+import { Sparkles, Zap, Shield, TrendingUp } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto min-h-[calc(100vh-4rem)] max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      {/* Hero Section - Mejorado */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center"
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mx-auto mb-16 flex max-w-4xl flex-col items-center text-center"
       >
-        <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
+        <motion.span
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/10 via-primary/5 to-secondary/10 px-5 py-2 text-sm font-semibold text-primary border border-primary/20 shadow-lg shadow-primary/10 backdrop-blur-sm"
+        >
+          <Sparkles className="h-4 w-4" />
           Gestión eficiente de novedades
-        </span>
-        <h1 className="mt-6 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Centraliza novedades y peticiones con un flujo dinámico y transparente
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
+        </motion.span>
+        
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 text-balance text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text"
+        >
+          Centraliza novedades y peticiones
+          <span className="block mt-2 bg-gradient-to-r from-primary via-indigo-600 to-secondary bg-clip-text text-transparent">
+            con un flujo dinámico
+          </span>
+        </motion.h1>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-6 text-xl text-muted-foreground max-w-2xl leading-relaxed"
+        >
           Registra novedades en segundos y dale seguimiento en un panel administrativo moderno, con
-          indicadores, filtros inteligentes y animaciones intuitivas.
-        </p>
+          indicadores inteligentes y una experiencia fluida.
+        </motion.p>
+
+        {/* Feature Pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+        >
+          {[
+            { icon: Zap, text: 'Rápido y eficiente' },
+            { icon: Shield, text: 'Seguro y confiable' },
+            { icon: TrendingUp, text: 'Seguimiento en tiempo real' },
+          ].map((feature, index) => (
+            <motion.div
+              key={feature.text}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+              className="flex items-center gap-2 rounded-lg bg-muted/50 px-4 py-2 text-sm font-medium text-muted-foreground border border-border/50 backdrop-blur-sm"
+            >
+              <feature.icon className="h-4 w-4 text-primary" />
+              {feature.text}
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
 
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+      {/* Main Content Grid - Rediseñado */}
+      <div className="grid gap-8 lg:grid-cols-[1.2fr,1fr] lg:gap-16 items-start">
+        {/* Formulario - Más prominente */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:sticky lg:top-24"
         >
           <NovedadForm />
         </motion.div>
 
+        {/* Admin Access Card - Mejorado */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col gap-6"
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <AdminAccessCard />
-          <div className="rounded-2xl border border-white/40 bg-white/70 p-6 shadow-lg shadow-primary/10 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
-            <h2 className="text-xl font-semibold text-foreground">
-              ¿Qué puedes esperar?
-            </h2>
-            <Separator className="my-4" />
-            <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <li>
-                Seguimiento en tiempo real con estados visuales: pendiente, en proceso y finalizada.
-              </li>
-              <li>
-                Panel inteligente con filtros, búsqueda por cédula o nombre y tarjetas con totales.
-              </li>
-              <li>
-                Experiencia moderna: animaciones suaves, modo oscuro y toasts informativos.
-              </li>
-            </ul>
-          </div>
         </motion.div>
       </div>
     </div>

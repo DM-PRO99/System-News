@@ -65,30 +65,48 @@ export function NovedadForm() {
   };
 
   return (
-    <Card className="relative overflow-hidden border-none bg-white/80 shadow-lg shadow-primary/10 backdrop-blur dark:bg-slate-900/60">
+    <Card className="relative overflow-hidden border border-border/60 bg-card/98 shadow-2xl shadow-primary/10 backdrop-blur-xl dark:bg-slate-900/90 ring-1 ring-primary/5">
       <motion.div
-        className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 rounded-full bg-primary/30 blur-3xl"
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+        className="pointer-events-none absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-primary/15 via-indigo-500/10 to-secondary/15 blur-3xl"
+        animate={{ 
+          rotate: 360,
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ 
+          rotate: { repeat: Infinity, duration: 20, ease: "linear" },
+          scale: { repeat: Infinity, duration: 8, ease: "easeInOut" }
+        }}
       />
-      <CardHeader className="relative space-y-3">
-        <CardTitle className="flex items-center gap-2 text-2xl font-semibold text-foreground">
-          <ClipboardList className="h-6 w-6 text-primary" />
-          Registrar nueva novedad
-        </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground">
-          Completa el formulario y nuestro equipo dará seguimiento a tu solicitud. Todos los campos
-          son obligatorios.
-        </CardDescription>
+      <CardHeader className="relative space-y-4 pb-6">
+        <div className="flex items-start gap-4">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", delay: 0.2 }}
+            className="rounded-2xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 p-3 shadow-xl shadow-primary/20 ring-2 ring-primary/20"
+          >
+            <ClipboardList className="h-7 w-7 text-primary" />
+          </motion.div>
+          <div className="flex-1">
+            <CardTitle className="text-3xl font-extrabold text-foreground tracking-tight">
+              Registrar nueva novedad
+            </CardTitle>
+            <CardDescription className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              Completa el formulario y nuestro equipo dará seguimiento a tu solicitud. Todos los campos
+              son obligatorios.
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="relative">
-        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="space-y-2">
-            <Label htmlFor="cedula">Cédula</Label>
+      <CardContent className="relative pt-2">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="space-y-2.5">
+            <Label htmlFor="cedula" className="text-sm font-semibold text-foreground">Cédula</Label>
             <Input
               id="cedula"
               placeholder="Ej: 1234567890"
               inputMode="numeric"
+              className="h-11 border-border/60 focus:border-primary focus:ring-primary/20 transition-all"
               {...register("cedula")}
               aria-invalid={errors.cedula ? "true" : "false"}
             />
@@ -105,11 +123,12 @@ export function NovedadForm() {
               )}
             </AnimatePresence>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="nombreCompleto">Nombre completo</Label>
+          <div className="space-y-2.5">
+            <Label htmlFor="nombreCompleto" className="text-sm font-semibold text-foreground">Nombre completo</Label>
             <Input
               id="nombreCompleto"
               placeholder="Nombre y apellidos"
+              className="h-11 border-border/60 focus:border-primary focus:ring-primary/20 transition-all"
               {...register("nombreCompleto")}
               aria-invalid={errors.nombreCompleto ? "true" : "false"}
             />
@@ -126,12 +145,13 @@ export function NovedadForm() {
               )}
             </AnimatePresence>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="correo">Correo electrónico</Label>
+          <div className="space-y-2.5">
+            <Label htmlFor="correo" className="text-sm font-semibold text-foreground">Correo electrónico</Label>
             <Input
               id="correo"
               type="email"
               placeholder="tu@correo.com"
+              className="h-11 border-border/60 focus:border-primary focus:ring-primary/20 transition-all"
               {...register("correo")}
               aria-invalid={errors.correo ? "true" : "false"}
             />
@@ -148,12 +168,13 @@ export function NovedadForm() {
               )}
             </AnimatePresence>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="celular">Número de celular</Label>
+          <div className="space-y-2.5">
+            <Label htmlFor="celular" className="text-sm font-semibold text-foreground">Número de celular</Label>
             <Input
               id="celular"
               placeholder="Ej: 0987654321"
               inputMode="numeric"
+              className="h-11 border-border/60 focus:border-primary focus:ring-primary/20 transition-all"
               {...register("celular")}
               aria-invalid={errors.celular ? "true" : "false"}
             />
@@ -170,12 +191,13 @@ export function NovedadForm() {
               )}
             </AnimatePresence>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="descripcion">Descripción de la novedad</Label>
+          <div className="space-y-2.5">
+            <Label htmlFor="descripcion" className="text-sm font-semibold text-foreground">Descripción de la novedad</Label>
             <Textarea
               id="descripcion"
               placeholder="Cuéntanos los detalles de la novedad o petición..."
               rows={5}
+              className="border-border/60 focus:border-primary focus:ring-primary/20 transition-all resize-none"
               {...register("descripcion")}
               aria-invalid={errors.descripcion ? "true" : "false"}
             />
@@ -195,7 +217,7 @@ export function NovedadForm() {
 
           <Button
             type="submit"
-            className="group relative w-full overflow-hidden bg-gradient-to-r from-primary via-indigo-500 to-secondary text-base font-semibold shadow-lg shadow-primary/20 transition hover:shadow-xl hover:shadow-primary/30"
+            className="group relative w-full overflow-hidden bg-gradient-to-r from-primary via-indigo-600 to-secondary text-base font-bold shadow-xl shadow-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98] h-12"
             disabled={!isValid || !isDirty || isSubmitting}
           >
             <AnimatePresence mode="wait" initial={false}>

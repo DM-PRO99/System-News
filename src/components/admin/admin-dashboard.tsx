@@ -165,22 +165,22 @@ export function AdminDashboard() {
   };
 
   return (
-    <section className="space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-      <header className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+    <section className="space-y-8 px-4 py-8 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <header className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between pb-2 border-b border-border/50">
         <div>
           <motion.h1
-            className="text-3xl font-bold tracking-tight text-foreground"
+            className="text-4xl font-bold tracking-tight text-foreground mb-2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             Panel administrativo
           </motion.h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Revisa las novedades recibidas, filtra por estado y gestiona el flujo de resolución.
           </p>
         </div>
-        <Button variant="outline" onClick={() => void mutate()}>
+        <Button variant="outline" onClick={() => void mutate()} className="shadow-sm hover:shadow-md transition-shadow">
           <RefreshCw className="mr-2 h-4 w-4" />
           Actualizar
         </Button>
@@ -188,16 +188,20 @@ export function AdminDashboard() {
 
       <StatsRow stats={stats} isLoading={isLoading} />
 
-      <Card className="border-none bg-white/80 shadow-lg backdrop-blur dark:bg-slate-900/70">
+      <Card className="border border-border/50 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80">
         <CardHeader className="space-y-4 pb-0">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Filter className="h-5 w-5 text-primary" />
-            Filtros y búsqueda
-          </CardTitle>
-          <CardDescription>
-            Encuentra novedades por nombre, cédula o estado. Los resultados se actualizan en tiempo
-            real.
-          </CardDescription>
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-primary/10 p-2">
+              <Filter className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-lg font-bold">Filtros y búsqueda</CardTitle>
+              <CardDescription className="mt-1">
+                Encuentra novedades por nombre, cédula o estado. Los resultados se actualizan en tiempo
+                real.
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="grid gap-4 pt-4 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative">
@@ -243,16 +247,16 @@ export function AdminDashboard() {
         </CardContent>
       </Card>
 
-      <Card className="border-none bg-white/80 shadow-xl backdrop-blur dark:bg-slate-900/70">
+      <Card className="border border-border/50 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80">
         <CardHeader className="pb-0">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-lg font-semibold text-foreground">Listado de novedades</CardTitle>
-              <CardDescription className="text-sm text-muted-foreground">
+              <CardTitle className="text-lg font-bold text-foreground">Listado de novedades</CardTitle>
+              <CardDescription className="text-sm text-muted-foreground mt-1">
                 Gestiona cada novedad desde la tabla o explora más detalles en el modal.
               </CardDescription>
             </div>
-            <Badge variant="outline" className="hidden md:inline-flex bg-secondary/10 text-secondary-foreground">
+            <Badge variant="outline" className="hidden md:inline-flex bg-secondary/10 text-secondary-foreground border-secondary/20 font-semibold">
               {data?.length ?? 0} registradas
             </Badge>
           </div>
@@ -266,10 +270,10 @@ export function AdminDashboard() {
             <EmptyState />
           ) : (
             <>
-              <div className="hidden overflow-hidden rounded-xl border border-border/60 md:block">
+              <div className="hidden overflow-hidden rounded-xl border border-border/50 md:block shadow-sm">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-muted/40">
+                    <TableRow className="bg-muted/30 border-b border-border/50">
                       <TableHead>Cédula</TableHead>
                       <TableHead>Nombre</TableHead>
                       <TableHead>Contacto</TableHead>
@@ -280,7 +284,7 @@ export function AdminDashboard() {
                   </TableHeader>
                   <TableBody>
                     {paginated.map((item) => (
-                      <TableRow key={item._id} className="transition hover:bg-muted/30">
+                      <TableRow key={item._id} className="transition-colors hover:bg-muted/40 border-b border-border/30">
                         <TableCell className="font-medium">{item.cedula}</TableCell>
                         <TableCell>
                           <div className="flex flex-col">
@@ -322,7 +326,7 @@ export function AdminDashboard() {
                           </div>
                         </TableCell>
                         <TableCell className="space-x-2 text-right">
-                          <Button variant="outline" size="sm" onClick={() => handleOpenModal(item)}>
+                          <Button variant="outline" size="sm" onClick={() => handleOpenModal(item)} className="shadow-sm hover:shadow-md transition-shadow">
                             <Eye className="mr-1 h-4 w-4" />
                             Ver
                           </Button>
@@ -345,7 +349,7 @@ export function AdminDashboard() {
                     layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="rounded-2xl border border-border/60 bg-background/70 p-4 shadow-sm"
+                    className="rounded-2xl border border-border/50 bg-card/95 p-5 shadow-lg shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80 hover:shadow-xl transition-shadow"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -453,14 +457,14 @@ function StatsRow({
       {cards.map((card) => (
         <Card
           key={card.title}
-          className="relative overflow-hidden border-none bg-white/80 shadow-lg backdrop-blur dark:bg-slate-900/70"
+          className="relative overflow-hidden border border-border/50 bg-card/95 shadow-lg shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80 hover:shadow-xl transition-shadow"
         >
           <div
             className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${card.accent}`}
             aria-hidden="true"
           />
-          <CardHeader className="relative space-y-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">{card.title}</CardTitle>
+          <CardHeader className="relative space-y-2 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground">{card.title}</CardTitle>
             <CardDescription className="text-xs">{card.description}</CardDescription>
           </CardHeader>
           <CardContent className="relative">
@@ -472,7 +476,7 @@ function StatsRow({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="text-3xl font-semibold text-foreground"
+                className="text-4xl font-bold text-foreground"
               >
                 {card.value}
               </motion.p>

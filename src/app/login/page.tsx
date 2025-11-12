@@ -137,14 +137,14 @@ function LoginForm() {
         transition={{ duration: 0.6 }}
         className="w-full"
       >
-        <Card className="relative overflow-hidden border-none bg-white/80 shadow-xl backdrop-blur dark:bg-slate-900/70">
+        <Card className="relative overflow-hidden border border-border/50 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80">
           <motion.div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(37,99,235,0.15),_transparent_60%)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(37,99,235,0.10),_transparent_60%)]"
             animate={{ opacity: [0.75, 0.95, 0.75] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
           <CardHeader className="relative space-y-3">
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold text-foreground">
+            <CardTitle className="flex items-center gap-3 text-2xl font-bold text-foreground">
               {isRegisterMode ? (
                 <>
                   <UserPlus className="h-6 w-6 text-primary" />
@@ -287,7 +287,7 @@ function LoginForm() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-primary via-indigo-500 to-secondary text-base font-semibold shadow-lg shadow-primary/20 transition hover:shadow-primary/30"
+                    className="w-full bg-gradient-to-r from-primary via-indigo-600 to-secondary text-base font-semibold shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98]"
                     disabled={!registerForm.formState.isValid || isRegistering}
                   >
                     <UserPlus className="mr-2 h-5 w-5" />
@@ -369,7 +369,7 @@ function LoginForm() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-primary via-indigo-500 to-secondary text-base font-semibold shadow-lg shadow-primary/20 transition hover:shadow-primary/30"
+                    className="w-full bg-gradient-to-r from-primary via-indigo-600 to-secondary text-base font-semibold shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98]"
                     disabled={!loginForm.formState.isValid || loginForm.formState.isSubmitting || isPending}
                   >
                     <LogIn className="mr-2 h-5 w-5" />

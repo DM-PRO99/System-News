@@ -39,42 +39,44 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
-          <div className="rounded-full bg-primary/10 p-2 text-primary shadow-sm">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/95 border-b border-border/50 shadow-sm">
+      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 p-2.5 text-primary shadow-lg shadow-primary/10 ring-1 ring-primary/20">
             <LayoutDashboard className="h-6 w-6" />
           </div>
           <div>
-            <Link href="/" className="text-lg font-semibold tracking-tight text-foreground">
+            <Link href="/" className="text-xl font-bold tracking-tight text-foreground transition-colors hover:text-primary">
               Sistema de Novedades
             </Link>
-            <p className="hidden text-sm text-muted-foreground sm:block">
+            <p className="hidden text-xs font-medium text-muted-foreground sm:block mt-0.5">
               Gestiona novedades de forma ágil y centralizada
             </p>
           </div>
         </div>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-5 md:flex">
           <ThemeToggle />
           {isAdmin ? (
             <>
-              <span className="text-sm font-medium text-foreground">
-                Hola, {session?.user?.name || "Administrador"}
-              </span>
+              <div className="flex items-center gap-2 rounded-lg bg-primary/5 px-4 py-2 border border-primary/10">
+                <span className="text-sm font-semibold text-foreground">
+                  Hola, <span className="text-primary">{session?.user?.name || "Administrador"}</span>
+                </span>
+              </div>
               {pathname !== "/admin" && (
-                <Button onClick={handleDashboard} variant="secondary" className="gap-2">
+                <Button onClick={handleDashboard} variant="secondary" className="gap-2 shadow-sm hover:shadow-md transition-shadow">
                   <LayoutDashboard className="h-4 w-4" />
                   Panel
                 </Button>
               )}
-              <Button onClick={handleLogout} variant="destructive" className="gap-2">
+              <Button onClick={handleLogout} variant="destructive" className="gap-2 shadow-sm hover:shadow-md transition-shadow">
                 <LogOut className="h-4 w-4" />
                 Cerrar sesión
               </Button>
             </>
           ) : (
-            <Button onClick={handleLogin} className="gap-2">
+            <Button onClick={handleLogin} className="gap-2 bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-600/90 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
               <LogIn className="h-4 w-4" />
               Ingresar
             </Button>
@@ -88,10 +90,10 @@ export function Navbar() {
                 <Menu className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 space-y-1">
+            <DropdownMenuContent align="end" className="w-64 space-y-1">
               {isAdmin && (
-                <div className="px-2 py-1.5 text-sm font-medium text-foreground border-b border-border">
-                  Hola, {session?.user?.name || "Administrador"}
+                <div className="px-3 py-2.5 text-sm font-semibold text-foreground border-b border-border/50 bg-primary/5">
+                  Hola, <span className="text-primary">{session?.user?.name || "Administrador"}</span>
                 </div>
               )}
               <DropdownMenuItem asChild>
