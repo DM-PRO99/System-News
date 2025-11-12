@@ -59,6 +59,9 @@ export function Navbar() {
           <ThemeToggle />
           {isAdmin ? (
             <>
+              <span className="text-sm font-medium text-foreground">
+                Hola, {session?.user?.name || "Administrador"}
+              </span>
               {pathname !== "/admin" && (
                 <Button onClick={handleDashboard} variant="secondary" className="gap-2">
                   <LayoutDashboard className="h-4 w-4" />
@@ -86,6 +89,11 @@ export function Navbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 space-y-1">
+              {isAdmin && (
+                <div className="px-2 py-1.5 text-sm font-medium text-foreground border-b border-border">
+                  Hola, {session?.user?.name || "Administrador"}
+                </div>
+              )}
               <DropdownMenuItem asChild>
                 <Link href="/" className="flex items-center gap-2">
                   <Home className="h-4 w-4" />
