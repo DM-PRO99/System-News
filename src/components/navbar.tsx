@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Menu, LogOut, LogIn, LayoutDashboard, Home } from "lucide-react";
+import { Menu, LogOut, LogIn, LayoutDashboard, Home, Building2, Bell } from "lucide-react";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -39,26 +39,30 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/95 border-b border-border/50 shadow-sm">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 shadow-sm">
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
-          <div className="rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 p-2.5 text-primary shadow-lg shadow-primary/10 ring-1 ring-primary/20">
-            <LayoutDashboard className="h-6 w-6" />
+          <div className="rounded-xl bg-gradient-to-br from-primary via-primary-light to-accent p-2.5 text-white shadow-lg shadow-primary/30 ring-1 ring-primary/20">
+            <Building2 className="h-6 w-6" />
           </div>
           <div>
             <Link href="/" className="text-xl font-bold tracking-tight text-foreground transition-colors hover:text-primary">
               Sistema de Novedades
             </Link>
             <p className="hidden text-xs font-medium text-muted-foreground sm:block mt-0.5">
-              Gestiona novedades de forma ágil y centralizada
+              InfoMira Itagüí
             </p>
           </div>
         </div>
 
-        <div className="hidden items-center gap-5 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
           {isAdmin ? (
             <>
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell className="h-5 w-5" />
+                <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-accent"></span>
+              </Button>
               <div className="flex items-center gap-2 rounded-lg bg-primary/5 px-4 py-2 border border-primary/10">
                 <span className="text-sm font-semibold text-foreground">
                   Hola, <span className="text-primary">{session?.user?.name || "Administrador"}</span>
@@ -76,10 +80,15 @@ export function Navbar() {
               </Button>
             </>
           ) : (
-            <Button onClick={handleLogin} className="gap-2 bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-600/90 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
-              <LogIn className="h-4 w-4" />
-              Ingresar
-            </Button>
+            <>
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell className="h-5 w-5" />
+              </Button>
+              <Button onClick={handleLogin} className="gap-2 bg-gradient-to-r from-primary via-primary-light to-accent hover:from-primary/90 hover:via-primary-light/90 hover:to-accent/90 text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all">
+                <LogIn className="h-4 w-4" />
+                Ingresar
+              </Button>
+            </>
           )}
         </div>
 

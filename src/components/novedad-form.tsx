@@ -65,9 +65,9 @@ export function NovedadForm() {
   };
 
   return (
-    <Card className="relative overflow-hidden border border-border/60 bg-card/98 shadow-2xl shadow-primary/10 backdrop-blur-xl dark:bg-slate-900/90 ring-1 ring-primary/5">
+    <Card className="relative overflow-hidden border border-border/60 bg-card/98 shadow-2xl shadow-primary/30 backdrop-blur-xl ring-1 ring-primary/5">
       <motion.div
-        className="pointer-events-none absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-primary/15 via-indigo-500/10 to-secondary/15 blur-3xl"
+        className="pointer-events-none absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-primary/20 via-primary-light/15 to-accent/20 blur-3xl"
         animate={{ 
           rotate: 360,
           scale: [1, 1.1, 1]
@@ -83,9 +83,9 @@ export function NovedadForm() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", delay: 0.2 }}
-            className="rounded-2xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 p-3 shadow-xl shadow-primary/20 ring-2 ring-primary/20"
+            className="rounded-2xl bg-gradient-to-br from-primary via-primary-light to-accent p-3 shadow-xl shadow-primary/30"
           >
-            <ClipboardList className="h-7 w-7 text-primary" />
+            <ClipboardList className="h-7 w-7 text-white" />
           </motion.div>
           <div className="flex-1">
             <CardTitle className="text-3xl font-extrabold text-foreground tracking-tight">
@@ -217,7 +217,7 @@ export function NovedadForm() {
 
           <Button
             type="submit"
-            className="group relative w-full overflow-hidden bg-gradient-to-r from-primary via-indigo-600 to-secondary text-base font-bold shadow-xl shadow-primary/30 transition-all hover:shadow-2xl hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98] h-12"
+            className="group relative w-full overflow-hidden bg-gradient-to-r from-primary via-primary-light to-accent hover:from-primary/90 hover:via-primary-light/90 hover:to-accent/90 text-white text-base font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all hover:scale-[1.02] active:scale-[0.98] h-12"
             disabled={!isValid || !isDirty || isSubmitting}
           >
             <AnimatePresence mode="wait" initial={false}>
