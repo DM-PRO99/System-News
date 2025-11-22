@@ -56,3 +56,5 @@ UsuarioSchema.pre("save", async function (next) {
 
 export const Usuario = models.Usuario || model<IUsuario>("Usuario", UsuarioSchema);
 
+
+

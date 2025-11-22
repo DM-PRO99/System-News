@@ -177,7 +177,7 @@ export function AdminDashboard() {
             Panel administrativo
           </motion.h1>
           <p className="text-base text-muted-foreground">
-            Revisa las novedades recibidas, filtra por estado y gestiona el flujo de resolución.
+            Revisa las novedades recibidas, filtra por estado y gestiona.
           </p>
         </div>
         <Button variant="outline" onClick={() => void mutate()} className="shadow-sm hover:shadow-md transition-shadow">

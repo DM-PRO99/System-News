@@ -31,9 +31,9 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 text-balance text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text"
         >
-          Centraliza novedades y peticiones
+          Novedades Punto de Información
           <span className="block mt-2 bg-gradient-to-r from-primary via-indigo-600 to-secondary bg-clip-text text-transparent">
-            con un flujo dinámico
+            InfoMira Itagui
           </span>
         </motion.h1>
         
@@ -43,8 +43,8 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 text-xl text-muted-foreground max-w-2xl leading-relaxed"
         >
-          Registra novedades en segundos y dale seguimiento en un panel administrativo moderno, con
-          indicadores inteligentes y una experiencia fluida.
+          Aqui pueden registrar las  novedades.
+  
         </motion.p>
 
         {/* Feature Pills */}
