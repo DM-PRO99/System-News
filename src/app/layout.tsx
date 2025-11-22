@@ -18,9 +18,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sistema de Novedades",
+  title: "Sistema de Novedades - InfoMira Itagüí",
   description:
-    "Plataforma moderna para gestionar novedades y peticiones con panel administrativo y reportes en tiempo real.",
+    "Sistema integral para el seguimiento y gestión de solicitudes. InfoMira Itagüí - Gestión eficiente de novedades.",
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -36,11 +40,13 @@ export default function RootLayout({
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-1 relative overflow-hidden">
-              {/* Background decorative elements */}
+            <main className="flex-1 relative overflow-hidden bg-gradient-to-br from-background via-secondary/20 to-background">
+              {/* Background decorative elements con colores corporativos */}
               <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-accent/3 rounded-full blur-3xl" />
               </div>
               <div className="relative z-10">
                 {children}

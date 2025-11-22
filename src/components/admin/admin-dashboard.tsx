@@ -169,7 +169,7 @@ export function AdminDashboard() {
       <header className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between pb-2 border-b border-border/50">
         <div>
           <motion.h1
-            className="text-4xl font-bold tracking-tight text-foreground mb-2"
+            className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent mb-2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -180,7 +180,11 @@ export function AdminDashboard() {
             Revisa las novedades recibidas, filtra por estado y gestiona.
           </p>
         </div>
-        <Button variant="outline" onClick={() => void mutate()} className="shadow-sm hover:shadow-md transition-shadow">
+        <Button 
+          variant="outline" 
+          onClick={() => void mutate()} 
+          className="shadow-sm hover:shadow-md transition-all border-primary/30 hover:border-primary/50 bg-card/50 backdrop-blur-sm"
+        >
           <RefreshCw className="mr-2 h-4 w-4" />
           Actualizar
         </Button>
@@ -188,11 +192,11 @@ export function AdminDashboard() {
 
       <StatsRow stats={stats} isLoading={isLoading} />
 
-      <Card className="border border-border/50 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80">
+      <Card className="border border-border/60 bg-card/98 shadow-2xl shadow-primary/30 backdrop-blur-xl ring-1 ring-primary/5">
         <CardHeader className="space-y-4 pb-0">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-primary/10 p-2">
-              <Filter className="h-5 w-5 text-primary" />
+            <div className="rounded-lg bg-gradient-to-br from-primary via-primary-light to-accent p-2 shadow-lg shadow-primary/30">
+              <Filter className="h-5 w-5 text-white" />
             </div>
             <div>
               <CardTitle className="text-lg font-bold">Filtros y búsqueda</CardTitle>
@@ -247,7 +251,7 @@ export function AdminDashboard() {
         </CardContent>
       </Card>
 
-      <Card className="border border-border/50 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80">
+      <Card className="border border-border/60 bg-card/98 shadow-2xl shadow-primary/30 backdrop-blur-xl ring-1 ring-primary/5">
         <CardHeader className="pb-0">
           <div className="flex items-center justify-between">
             <div>
@@ -256,7 +260,7 @@ export function AdminDashboard() {
                 Gestiona cada novedad desde la tabla o explora más detalles en el modal.
               </CardDescription>
             </div>
-            <Badge variant="outline" className="hidden md:inline-flex bg-secondary/10 text-secondary-foreground border-secondary/20 font-semibold">
+            <Badge variant="outline" className="hidden md:inline-flex bg-primary/10 text-primary border-primary/30 font-semibold">
               {data?.length ?? 0} registradas
             </Badge>
           </div>
@@ -349,7 +353,7 @@ export function AdminDashboard() {
                     layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="rounded-2xl border border-border/50 bg-card/95 p-5 shadow-lg shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80 hover:shadow-xl transition-shadow"
+                    className="rounded-2xl border border-border/60 bg-card/98 p-5 shadow-lg shadow-primary/30 backdrop-blur-xl ring-1 ring-primary/5 hover:shadow-xl hover:shadow-primary/40 transition-all"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -430,25 +434,29 @@ function StatsRow({
       title: "Total novedades",
       value: stats.total,
       description: "Acumulado histórico registrado.",
-      accent: "from-primary/20 via-primary/10 to-transparent",
+      accent: "from-primary/20 via-primary-light/15 to-accent/20",
+      iconColor: "text-primary",
     },
     {
       title: "Pendientes",
       value: stats.pendientes,
       description: "En espera de revisión.",
-      accent: "from-rose-400/25 via-rose-400/15 to-transparent",
+      accent: "from-primary/20 via-primary-light/10 to-transparent",
+      iconColor: "text-primary-light",
     },
     {
       title: "En proceso",
       value: stats.enProceso,
       description: "Se están gestionando actualmente.",
-      accent: "from-amber-400/25 via-amber-400/15 to-transparent",
+      accent: "from-primary-light/20 via-accent/15 to-transparent",
+      iconColor: "text-accent",
     },
     {
       title: "Finalizadas",
       value: stats.finalizadas,
       description: "Cerradas satisfactoriamente.",
-      accent: "from-emerald-400/25 via-emerald-400/15 to-transparent",
+      accent: "from-accent/20 via-primary/10 to-transparent",
+      iconColor: "text-primary",
     },
   ];
 
@@ -457,7 +465,7 @@ function StatsRow({
       {cards.map((card) => (
         <Card
           key={card.title}
-          className="relative overflow-hidden border border-border/50 bg-card/95 shadow-lg shadow-primary/5 backdrop-blur-xl dark:bg-slate-900/80 hover:shadow-xl transition-shadow"
+          className="relative overflow-hidden border border-border/60 bg-card/98 shadow-lg shadow-primary/30 backdrop-blur-xl ring-1 ring-primary/5 hover:shadow-xl hover:shadow-primary/40 transition-all"
         >
           <div
             className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${card.accent}`}
